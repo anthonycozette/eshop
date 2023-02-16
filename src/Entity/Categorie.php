@@ -13,7 +13,7 @@ class Categorie
 {
 
     use SlugTrait;
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -21,6 +21,9 @@ class Categorie
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\Column]
+    private ?int $categoryOrder = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categorie')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
@@ -51,6 +54,18 @@ class Categorie
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCategoryOrder(): ?int
+    {
+        return $this->categoryOrder;
+    }
+
+    public function setCategoryOrder(int $categoryOrder): self
+    {
+        $this->categoryOrder = $categoryOrder;
 
         return $this;
     }
